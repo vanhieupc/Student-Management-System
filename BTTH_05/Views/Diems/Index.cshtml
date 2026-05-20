@@ -1,0 +1,107 @@
+@model IEnumerable<BTTH_05.Models.Student>
+
+@{
+    ViewData["Title"] = "Quản lý lộ trình điểm - DNU";
+}
+
+<div class="container-fluid py-4 bg-light min-vh-100">
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-dark mb-1 text-uppercase">
+                <i class="fas fa- university me-2 text-primary"></i>Hệ thống Quản Lý Điểm 
+            </h2>
+            <p class="text-muted mb-0 small italic">Dữ liệu được cập nhật dựa trên lộ trình học tập thực tế của sinh viên</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a asp-action="Create" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-bold border-0" style="background-color: #003580;">
+                <i class="fas fa-plus-circle me-2"></i>NHẬP ĐIỂM MỚI
+            </a>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="bg-dark text-white border-0">
+                    <tr>
+                        <th class="ps-4 py-3 border-0">Mã SV</th>
+                        <th class="border-0">Họ Tên Sinh Viên</th>
+                        <th class="border-0 text-center">Năm 1</th>
+                        <th class="border-0 text-center">Năm 2</th>
+                        <th class="border-0 text-center">Năm 3</th>
+                        <th class="border-0 text-center">Năm 4</th>
+                        <th class="text-center border-0">GPA Tổng</th>
+                        <th class="text-end pe-4 border-0">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold text-primary">@item.MaSV</td>
+                                <td>
+                                    <div class="fw-bold text-dark">@item.HoTen</div>
+                                    <small class="text-muted">Lớp: @(item.LopHoc ?? "Chưa rõ") | Năm thứ @(item.NamThu ?? 1)</small>
+                                </td>
+
+                                @* Cột điểm Năm 1 - Luôn hiện *@
+                                <td class="text-center fw-bold text-info">
+                                    @(item.GpaNam1?.ToString("0.00") ?? "-")
+                                </td>
+
+                                @* Cột điểm Năm 2 - Động theo Năm thứ *@
+                                <td class="text-center @(item.NamThu < 2 ? "opacity-25 bg-light" : "")">
+                                    <span class="fw-bold text-warning">@(item.NamThu >= 2 ? (item.GpaNam2?.ToString("0.00") ?? "-") : "N/A")</span>
+                                </td>
+
+                                @* Cột điểm Năm 3 - Động theo Năm thứ *@
+                                <td class="text-center @(item.NamThu < 3 ? "opacity-25 bg-light" : "")">
+                                    <span class="fw-bold text-success">@(item.NamThu >= 3 ? (item.GpaNam3?.ToString("0.00") ?? "-") : "N/A")</span>
+                                </td>
+
+                                @* Cột điểm Năm 4 - Động theo Năm thứ *@
+                                <td class="text-center @(item.NamThu < 4 ? "opacity-25 bg-light" : "")">
+                                    <span class="fw-bold text-danger">@(item.NamThu >= 4 ? (item.GpaNam4?.ToString("0.00") ?? "-") : "N/A")</span>
+                                </td>
+
+                                <td class="text-center bg-light">
+                                    <div class="badge bg-primary rounded-pill px-3 py-2 fs-6 shadow-sm">
+                                        @(item.GpaTuNhap?.ToString("0.00") ?? "0.00")
+                                    </div>
+                                </td>
+
+                                <td class="text-end pe-4">
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <a asp-action="Edit" asp-route-id="@item.MaSV" 
+                                           class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold">
+                                            <i class="fas fa-edit me-1"></i>Sửa điểm
+                                        </a>
+                                        <a asp-controller="Student" asp-action="Details" asp-route-id="@item.MaSV" 
+                                           class="btn btn-sm btn-outline-info rounded-pill px-3 fw-bold">
+                                            <i class="fas fa-user-circle me-1"></i>Hồ sơ
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rounded-4 { border-radius: 1rem !important; }
+    .table thead th { font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.5px; }
+    .table tbody tr { transition: all 0.2s; border-bottom: 1px solid #f0f0f0; }
+    .table tbody tr:hover { background-color: rgba(0, 53, 128, 0.02); }
+    .opacity-25 { opacity: 0.25 !important; }
+    .italic { font-style: italic; }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+}

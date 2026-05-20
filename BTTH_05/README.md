@@ -1,0 +1,204 @@
+# ?? H??ng D?n H? Th?ng Qu?n Lý Sinh Viên
+
+## ?? Các Tính N?ng ?ã Tri?n Khai
+
+### 1?? **Tìm Ki?m Nâng Cao**
+- **Tìm theo tên sinh viên**: Nh?p m?t ph?n tên ?? tìm ki?m
+- **Tìm theo chuyên ngành**: L?c sinh viên theo chuyên ngành
+- H? tr? tìm ki?m không phân bi?t ch? hoa/th??ng
+
+**V? trí**: Tab "Tìm Ki?m Nâng Cao" trên trang Index
+**Ph??ng th?c**: S? d?ng `SearchStudents()` trong `StudentService`
+
+### 2?? **Phân Trang (Pagination)**
+- **Kích th??c trang**: 5 sinh viên m?i trang
+- **?i?u h??ng**: 
+  - Nút "??u" - Trang ??u tiên
+  - Nút "Tr??c" - Trang tr??c ?ó
+  - S? trang - Nh?n ?? ?i t?i trang c? th?
+  - Nút "Ti?p" - Trang ti?p theo
+  - Nút "Cu?i" - Trang cu?i cùng
+- H? tr? hi?n th? trang s? "..." khi có nhi?u trang
+
+**V? trí**: D??i b?ng danh sách
+**Ph??ng th?c**: 
+- `Skip()` và `Take()` ?? l?y d? li?u theo trang
+- ViewModel `StudentListViewModel` ?? truy?n d? li?u phân trang
+
+### 3?? **Validate D? Li?u**
+Các validation ???c áp d?ng:
+
+| Tr??ng | Validation |
+|--------|-----------|
+| ID | B?t bu?c |
+| Tên | B?t bu?c, t?i ?a 100 ký t? |
+| Tu?i | B?t bu?c, t? 18 ??n 30 |
+| Chuyên Ngành | B?t bu?c, t?i ?a 100 ký t? |
+
+**V? trí**: Model `Student.cs` s? d?ng `DataAnnotations`
+**Ph??ng th?c**: `ModelState.IsValid` ki?m tra ? Controller
+
+### 4?? **Giao Di?n Bootstrap 5**
+- **Responsive Design**: T? ??ng thích ?ng v?i màn hình mobile/tablet/desktop
+- **Navbar**: Menu ?i?u h??ng v?i n?n màu xanh
+- **Cards**: Các th? n?i dung v?i bóng và hi?u ?ng hover
+- **Buttons**: Các nút hành ??ng v?i icon và màu s?c phân bi?t
+- **Table**: B?ng sáng t?o v?i hàng hover
+- **Forms**: Form nh?p li?u v?i validation hi?n th?
+
+---
+
+## ?? C?u Trúc Th? M?c
+
+```
+BTTH_05/
+??? Models/
+?   ??? Student.cs (Model sinh viên)
+?   ??? StudentListViewModel.cs (ViewModel cho phân trang)
+?   ??? ErrorViewModel.cs
+??? Controllers/
+?   ??? StudentController.cs (X? lý các action cho sinh viên)
+?   ??? HomeController.cs
+??? Services/
+?   ??? StudentService.cs (D?ch v? qu?n lý sinh viên)
+??? Views/
+?   ??? Student/
+?   ?   ??? Index.cshtml (Danh sách + Tìm ki?m + Phân trang)
+?   ?   ??? Create.cshtml (Thêm sinh viên)
+?   ?   ??? Edit.cshtml (S?a sinh viên)
+?   ?   ??? Delete.cshtml (Xóa sinh viên)
+?   ??? Shared/
+?   ?   ??? _Layout.cshtml (Layout chính)
+?   ?   ??? _ValidationScriptsPartial.cshtml
+?   ??? Home/
+?       ??? ...
+??? wwwroot/
+?   ??? css/
+?   ?   ??? site.css (Style tùy ch?nh)
+?   ??? js/
+?   ?   ??? site.js
+?   ??? lib/ (Bootstrap, jQuery, ...)
+??? Program.cs (C?u hình DI, Routes)
+??? BTTH_05.csproj
+```
+
+---
+
+## ?? Cách S? D?ng
+
+### **Trang Danh Sách**
+```
+URL: https://localhost:7xxx/Student/Index
+```
+- Xem danh sách t?t c? sinh viên
+- Tìm ki?m theo tên ho?c chuyên ngành
+- Phân trang ?? xem t?ng 5 sinh viên
+- Kích vào "S?a" ?? c?p nh?t thông tin
+- Kích vào "Xóa" ?? xóa sinh viên
+
+### **Thêm Sinh Viên**
+```
+URL: https://localhost:7xxx/Student/Create
+```
+- ?i?n thông tin: Tên, Tu?i, Chuyên Ngành
+- ?n "L?u" ?? thêm
+- Validation s? ki?m tra d? li?u t? ??ng
+
+### **S?a Sinh Viên**
+```
+URL: https://localhost:7xxx/Student/Edit/{id}
+```
+- C?p nh?t thông tin
+- ?n "C?p Nh?t"
+
+### **Xóa Sinh Viên**
+```
+URL: https://localhost:7xxx/Student/Delete/{id}
+```
+- Xác nh?n xóa
+- Hành ??ng không th? hoàn tác
+
+---
+
+## ?? D? Li?u M?u
+
+H? th?ng ?i kèm v?i 6 sinh viên m?u:
+
+| ID | Tên | Tu?i | Chuyên Ngành |
+|----|-----|------|-----------|
+| 1 | ?? Quang Th? | 20 | CNTT |
+| 2 | Tr?n ??ng Công | 21 | K? toán |
+| 3 | Nguy?n V?n A | 22 | CNTT |
+| 4 | Ph?m Th? B | 19 | Qu?n tr? kinh doanh |
+| 5 | Lê Minh C | 23 | K? toán |
+| 6 | Hoàng Thu D | 20 | CNTT |
+
+---
+
+## ?? Tùy Ch?nh
+
+### **Thay ??i kích th??c trang**
+S?a file: `Controllers/StudentController.cs`
+```csharp
+private const int PageSize = 5;  // Thay ??i s? này
+```
+
+### **Thêm chuyên ngành m?i**
+S?a file: `Services/StudentService.cs`
+```csharp
+private static List<Student> students = new()
+{
+    // Thêm sinh viên m?i vào ?ây
+};
+```
+
+### **Tùy ch?nh màu s?c**
+S?a file: `wwwroot/css/site.css`
+- Tìm các class `.btn-primary`, `.card`, v.v.
+
+---
+
+## ?? Công Ngh? S? D?ng
+
+- **Framework**: ASP.NET Core (Razor Pages + MVC)
+- **Ngôn ng?**: C# 13
+- **Front-end**: Bootstrap 5, jQuery
+- **Validation**: DataAnnotations, jQuery Validation Unobtrusive
+- **.NET Version**: .NET 10
+
+---
+
+## ? Checklist Tính N?ng
+
+- ? Tìm ki?m nâng cao (theo tên và chuyên ngành)
+- ? Phân trang (Skip/Take)
+- ? Validate d? li?u (DataAnnotations + ModelState)
+- ? Giao di?n Bootstrap 5
+- ? CRUD ??y ?? (Create, Read, Update, Delete)
+- ? Responsive design
+- ? Hi?u ?ng hover và animation
+
+---
+
+## ?? Color Scheme
+
+| Màu | Hex | S? d?ng |
+|-----|-----|--------|
+| Primary (Xanh) | #0d6efd | Navbar, Button Primary |
+| Success (Xanh lá) | #198754 | Card Header, Button Success |
+| Warning (Vàng) | #ffc107 | Button Edit |
+| Danger (??) | #dc3545 | Button Delete, Alert Error |
+| Light (Xám nh?t) | #f8f9fa | Background, Footer |
+| Dark (Xám ??m) | #212529 | Text m?c ??nh |
+
+---
+
+## ?? H? Tr?
+
+N?u g?p l?i:
+1. Ki?m tra Console xem có thông báo l?i nào không
+2. Xem file `Program.cs` ?? ki?m tra DI configuration
+3. Xem Models validation có chính xác không
+4. Clear browser cache (Ctrl+Shift+Delete) và reload
+
+Chúc b?n s? d?ng vui v?! ??

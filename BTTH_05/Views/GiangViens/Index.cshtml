@@ -1,0 +1,159 @@
+@model IEnumerable<BTTH_05.Models.GiangVien>
+
+@{
+    ViewData["Title"] = "Quản lý Giảng viên - DNU";
+}
+
+<div class="container-fluid px-4 bg-light min-vh-100">
+    <div class="py-4">
+        <h3 class="fw-bold text-dark mb-1">
+            <i class="fas fa-chalkboard-teacher me-2 text-primary"></i>Quản lý Giảng viên
+        </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-primary">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Giảng viên</li>
+            </ol>
+        </nav>
+    </div>
+
+    @* Thanh công cụ *@
+    <div class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded-4 shadow-sm">
+        <div class="d-flex align-items-center gap-3">
+            <div class="input-group" style="width: 300px;">
+                <span class="input-group-text bg-light border-0"><i class="fas fa-filter text-muted"></i></span>
+                <select class="form-select border-0 shadow-none bg-light fw-bold" id="filterKhoa">
+                    <option value="">Tất cả khoa</option>
+                    @if (ViewBag.DanhSachKhoa != null)
+                    {
+                        foreach (var khoa in ViewBag.DanhSachKhoa)
+                        {
+                            <option value="@khoa">@khoa</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-muted small d-none d-md-block">Tổng số: <b class="text-dark">@Model.Count()</b> giảng viên</span>
+            <a asp-action="Create" class="btn btn-primary px-4 rounded-pill shadow-sm fw-bold border-0" style="background-color: #ff6b00;">
+                <i class="fas fa-plus-circle me-2"></i>THÊM GIẢNG VIÊN
+            </a>
+        </div>
+    </div>
+
+    @* Bảng dữ liệu *@
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="bg-primary text-white border-0">
+                    <tr class="text-uppercase" style="font-size: 0.8rem; letter-spacing: 0.5px;">
+                        <th class="ps-4 py-3 border-0">Mã GV</th>
+                        <th class="border-0">Họ và tên</th>
+                        <th class="border-0">Email / SĐT</th>
+                        <th class="border-0">Khoa / Chức danh</th>
+                        <th class="border-0">Trạng thái</th>
+                        <th class="text-end pe-4 border-0">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="row-gv" data-khoa="@item.Khoa">
+                            <td class="ps-4 fw-bold text-primary">@item.MaGV</td>
+                            <td>
+                                <div class="fw-bold text-dark">@item.HoTen</div>
+                                <div class="text-muted small">Giảng viên DNU</div>
+                            </td>
+                            <td>
+                                <div class="small text-dark">@item.Email</div>
+                                <div class="small text-muted">@item.SoDienThoai</div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border px-2 mb-1">@(item.Khoa ?? "N/A")</span>
+                                <div class="small text-muted ps-1">@(item.ChucDanh ?? "Giảng viên")</div>
+                            </td>
+                            <td>
+                                @{
+                                    string badgeClass = item.TrangThai switch
+                                    {
+                                        "Đang làm việc" => "bg-success",
+                                        "Nghỉ phép" => "bg-warning text-dark",
+                                        "Đã nghỉ việc" => "bg-secondary",
+                                        _ => "bg-info text-dark"
+                                    };
+                                }
+                                <span class="badge @badgeClass rounded-pill px-3 py-2" style="font-size: 0.75rem;">
+                                    @item.TrangThai
+                                </span>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="d-flex justify-content-end gap-2">
+                                    <a asp-action="Edit" asp-route-id="@item.MaGV" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold">
+                                        <i class="fas fa-edit me-1"></i>Sửa
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger rounded-pill px-3 fw-bold"
+                                            onclick="confirmDeleteGV('@item.MaGV', '@item.HoTen')">
+                                        <i class="fas fa-trash-alt me-1"></i>Xóa
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@* Modal xác nhận xóa *@
+<div class="modal fade" id="deleteGVModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-body p-5 text-center">
+                <i class="fas fa-user-times fa-4x text-danger mb-4"></i>
+                <h3 class="fw-bold">Xóa giảng viên?</h3>
+                <p class="text-muted">Xác nhận xóa giảng viên <br><strong id="gvNameDisplay" class="text-dark"></strong> không?</p>
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold" data-bs-dismiss="modal">HỦY</button>
+                    <form asp-action="Delete" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" id="gvIdInput" />
+                        <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold shadow-sm">XÁC NHẬN XÓA</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rounded-4 { border-radius: 1rem !important; }
+    .bg-primary { background-color: #003580 !important; }
+    .table thead th { border: none; }
+    .table tbody tr { transition: all 0.2s; }
+    .table tbody tr:hover { background-color: rgba(0, 53, 128, 0.02); }
+    .badge { font-weight: 600; }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <script>
+        // Bộ lọc khoa
+        document.getElementById('filterKhoa').addEventListener('change', function() {
+            let val = this.value;
+            document.querySelectorAll('.row-gv').forEach(row => {
+                let rowKhoa = row.getAttribute('data-khoa');
+                row.style.display = (val === "" || rowKhoa === val) ? "" : "none";
+            });
+        });
+
+        // Modal xóa
+        function confirmDeleteGV(id, name) {
+            document.getElementById('gvNameDisplay').innerText = name;
+            document.getElementById('gvIdInput').value = id;
+            var myModal = new bootstrap.Modal(document.getElementById('deleteGVModal'));
+            myModal.show();
+        }
+    </script>
+}

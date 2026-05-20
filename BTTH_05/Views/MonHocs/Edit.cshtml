@@ -1,0 +1,108 @@
+@model BTTH_05.Models.MonHoc
+
+@{
+    ViewData["Title"] = "Chỉnh sửa môn học";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm border-0 rounded-3">
+        @* Phần Header Card *@
+        <div class="card-header bg-primary text-white p-3">
+            <h4 class="mb-0"><i class="fas fa-edit me-2"></i>Chỉnh sửa môn học</h4>
+        </div>
+        
+        <div class="card-body p-4">
+            @* QUÂN CHÚ Ý: Route-id khớp với MaMH để cập nhật đúng bản ghi *@
+            <form asp-action="Edit" asp-route-id="@Model.MaMH">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                @* Khóa chính ẩn để Model Binder nhận diện được đối tượng khi Submit *@
+                <input type="hidden" asp-for="MaMH" />
+
+                <div class="row g-3">
+                    @* --- MÃ MÔN HỌC (Hiển thị nhưng không cho sửa nếu là khóa chính) --- *@
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Mã môn học</label>
+                        <input class="form-control bg-light" value="@Model.MaMH" disabled />
+                        <small class="text-muted">Mã môn học không thể thay đổi trực tiếp.</small>
+                    </div>
+
+                    @* --- TÊN MÔN HỌC (Đã thêm cho Quân) --- *@
+                    <div class="col-md-6">
+                        <label asp-for="TenMH" class="form-label fw-bold">Tên môn học</label>
+                        <input asp-for="TenMH" class="form-control border-primary-subtle" placeholder="Nhập tên môn học mới..." />
+                        <span asp-validation-for="TenMH" class="text-danger"></span>
+                    </div>
+
+                    @* --- SỐ TÍN CHỈ --- *@
+                    <div class="col-md-3">
+                        <label asp-for="SoTinChi" class="form-label fw-bold">Số tín chỉ</label>
+                        <input asp-for="SoTinChi" class="form-control" type="number" />
+                        <span asp-validation-for="SoTinChi" class="text-danger"></span>
+                    </div>
+
+                    @* --- HỌC KỲ --- *@
+                    <div class="col-md-3">
+                        <label asp-for="HocKy" class="form-label fw-bold">Học kỳ</label>
+                        <input asp-for="HocKy" class="form-control" placeholder="VD: 1, 2, 3" />
+                        <span asp-validation-for="HocKy" class="text-danger"></span>
+                    </div>
+
+                    @* --- KHOA --- *@
+                    <div class="col-md-6">
+                        <label asp-for="Khoa" class="form-label fw-bold">Khoa</label>
+                        <input asp-for="Khoa" class="form-control" placeholder="Ví dụ: Công nghệ thông tin" />
+                        <span asp-validation-for="Khoa" class="text-danger"></span>
+                    </div>
+
+                    @* --- TRẠNG THÁI --- *@
+                    <div class="col-md-6">
+                        <label asp-for="TrangThai" class="form-label fw-bold">Trạng thái</label>
+                        <select asp-for="TrangThai" class="form-select">
+                            <option value="Đang mở">Đang mở</option>
+                            <option value="Đã đóng">Đã đóng</option>
+                        </select>
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+
+                    @* --- SĨ SỐ --- *@
+                    <div class="col-md-6">
+                        <label asp-for="SiSoHienTai" class="form-label fw-bold">Sĩ số hiện tại</label>
+                        <input asp-for="SiSoHienTai" class="form-control" type="number" />
+                        <span asp-validation-for="SiSoHienTai" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="SiSoToiDa" class="form-label fw-bold">Sĩ số tối đa</label>
+                        <input asp-for="SiSoToiDa" class="form-control" type="number" />
+                        <span asp-validation-for="SiSoToiDa" class="text-danger"></span>
+                    </div>
+
+                    @* --- GIẢNG VIÊN --- *@
+                    <div class="col-md-12">
+                        <label asp-for="MaGV" class="form-label fw-bold">Giảng viên giảng dạy</label>
+                        <input asp-for="MaGV" class="form-control border-primary" placeholder="Nhập tên giảng viên..." />
+                        <span asp-validation-for="MaGV" class="text-danger"></span>
+                        <small class="text-muted">Quân có thể gõ bất kỳ tên giảng viên nào vào đây.</small>
+                    </div>
+                </div>
+
+                @* Nút thao tác *@
+                <div class="d-flex gap-2 mt-4 pt-3 border-top">
+                    <button type="submit" class="btn btn-primary px-4 rounded-pill">
+                        <i class="fas fa-save me-2"></i>Lưu thay đổi
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4 rounded-pill">
+                        Quay lại danh sách
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,198 @@
+@model IEnumerable<BTTH_05.Models.MonHoc>
+
+@{
+    ViewData["Title"] = "Chương Trình Đào Tạo";
+}
+
+<div class="container-fluid px-4 bg-light min-vh-100">
+    @* Tiêu đề trang *@
+    <div class="d-flex justify-content-between align-items-center py-4">
+        <div>
+            <h3 class="fw-bold text-dark mb-1">
+                <i class="fas fa-graduation-cap me-2 text-primary"></i>QUẢN LÝ MÔN HỌC
+            </h3>
+            <p class="text-muted mb-0">Hệ thống quản lý chương trình đào tạo sinh viên</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary rounded-pill px-4 shadow-sm fw-bold">
+            <i class="fas fa-plus-circle me-2"></i>Thêm môn học mới
+        </a>
+    </div>
+
+    @* Thanh công cụ & Bộ lọc *@
+    <div class="row g-3 mb-4 p-3 bg-white rounded-3 shadow-sm align-items-center mx-0">
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-0"><i class="fas fa-filter text-muted"></i></span>
+                <select class="form-select border-0 bg-light shadow-none" id="filterKhoa">
+                    <option value="">Tất cả khoa</option>
+                    @if (ViewBag.DanhSachKhoa != null)
+                    {
+                        foreach (var khoa in ViewBag.DanhSachKhoa)
+                        {
+                            <option value="@khoa">@khoa</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select border-0 bg-light shadow-none" id="filterHocKy">
+                <option value="">Tất cả học kỳ</option>
+                <option value="1">Học kỳ 1</option>
+                <option value="2">Học kỳ 2</option>
+                <option value="3">Học kỳ 3</option>
+            </select>
+        </div>
+        <div class="col-md-6 text-end">
+            <span class="text-muted small">
+                Hiển thị <b class="text-primary">@Model.Count()</b> môn học trên trang này
+            </span>
+        </div>
+    </div>
+
+    @* Danh sách Môn học - Layout 6 card/trang khi kết hợp với Controller *@
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        @foreach (var item in Model) {
+            var siSoHienTai = item.SiSoHienTai ?? 0;
+            var siSoToiDa = (item.SiSoToiDa != null && item.SiSoToiDa > 0) ? item.SiSoToiDa.Value : 60;
+            var phanTram = (siSoHienTai * 100) / siSoToiDa;
+            var mauThanh = phanTram >= 100 ? "bg-danger" : (phanTram >= 80 ? "bg-warning" : "bg-success");
+
+            <div class="col card-item" data-khoa="@item.Khoa" data-hocky="@item.HocKy">
+                <div class="card h-100 border-0 shadow-sm rounded-4 p-3 card-hover">
+                    @* Header của Card: Chỉ giữ lại Mã môn ở trên *@
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary bg-opacity-10 p-3 rounded-4 me-3 text-primary shadow-sm">
+                            <i class="fas fa-layer-group fs-4"></i>
+                        </div>
+                        <div>
+                            <small class="text-uppercase fw-bold text-muted" style="letter-spacing: 1px; font-size: 0.75rem;">Mã môn học</small>
+                            <h5 class="fw-bold text-dark mb-0">@item.MaMH</h5>
+                        </div>
+                    </div>
+
+                    @* Nội dung chi tiết: Tên môn học được đưa xuống đây *@
+                    <div class="card-info small mb-3">
+                        @* TÊN MÔN HỌC - NẰM CHUNG CỘT Ở DƯỚI ĐÂY *@
+                        <div class="d-flex justify-content-between mb-2 p-2 bg-primary bg-opacity-10 rounded-3">
+                            <span class="text-muted fw-bold"><i class="fas fa-book me-2 text-primary"></i>Môn học:</span>
+                            <span class="fw-bold text-primary text-end">@item.TenMH</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2 mt-3">
+                            <span class="text-muted"><i class="far fa-star me-2"></i>Số tín chỉ:</span>
+                            <span class="fw-bold">@item.SoTinChi</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted"><i class="far fa-calendar-alt me-2"></i>Học kỳ:</span>
+                            <span class="badge bg-info bg-opacity-10 text-info fw-bold">
+                                @(string.IsNullOrEmpty(item.HocKy) ? "N/A" : $"Học kỳ {item.HocKy}")
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted"><i class="fas fa-university me-2"></i>Khoa:</span>
+                            <span class="fw-bold text-dark">@item.Khoa</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted"><i class="far fa-user me-2"></i>Giảng viên:</span>
+                            <span class="fw-bold text-primary">
+                                @(string.IsNullOrEmpty(item.MaGV) ? "Đang cập nhật" : item.MaGV)
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-1 mt-3">
+                            <span class="text-muted">Tỷ lệ đăng ký:</span>
+                            <span class="fw-bold @(phanTram >= 100 ? "text-danger" : "text-dark")">@siSoHienTai/@siSoToiDa</span>
+                        </div>
+                    </div>
+
+                    <div class="progress mb-1" style="height: 8px; border-radius: 10px; background-color: #f0f0f0;">
+                        <div class="progress-bar @mauThanh progress-bar-striped progress-bar-animated" 
+                             role="progressbar" style="width: @phanTram%"></div>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted" style="font-size: 0.7rem;">@phanTram% công suất</small>
+                    </div>
+
+                    @* Footer của Card *@
+                    <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                        <span class="badge @(item.TrangThai == "Đang mở" ? "bg-success" : "bg-secondary") rounded-pill px-3 py-2">
+                            <i class="fas fa-check-circle me-1"></i> @(item.TrangThai ?? "Đang mở")
+                        </span>
+                        
+                        <div class="d-flex gap-2">
+                            <a asp-action="Edit" asp-route-id="@item.MaMH" class="btn btn-sm btn-outline-primary rounded-circle action-btn shadow-sm">
+                                <i class="fas fa-pen"></i>
+                            </a>
+
+                            <form asp-action="Delete" asp-route-id="@item.MaMH" method="post" 
+                                  onsubmit="return confirm('Quân có chắc chắn muốn xóa môn [@item.MaMH] @item.TenMH không?');"
+                                  class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-circle action-btn shadow-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @* PHẦN PHÂN TRANG: Hiện 6 card mỗi trang *@
+    @if (ViewBag.TotalPages > 1)
+    {
+        <div class="d-flex justify-content-center py-5">
+            <nav aria-label="Page navigation">
+                <ul class="pagination shadow-sm">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link px-4 fw-bold" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</div>
+
+<style>
+    .card-hover { transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.05) !important; }
+    .card-hover:hover { transform: translateY(-10px); box-shadow: 0 1rem 3rem rgba(0,0,0,.15) !important; border-color: #4e73df !important; }
+    .action-btn { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+    .action-btn:hover { transform: scale(1.15); }
+    .pagination .page-item.active .page-link { background-color: #0d6efd; border-color: #0d6efd; color: white; }
+    .pagination .page-link { color: #0d6efd; border-radius: 8px; margin: 0 3px; }
+</style>
+
+@section Scripts {
+    <script>
+        document.getElementById('filterKhoa').addEventListener('change', filterCards);
+        document.getElementById('filterHocKy').addEventListener('change', filterCards);
+
+        function filterCards() {
+            let khoa = document.getElementById('filterKhoa').value;
+            let hocky = document.getElementById('filterHocKy').value;
+            let cards = document.querySelectorAll('.card-item');
+
+            cards.forEach(card => {
+                let cardKhoa = card.getAttribute('data-khoa');
+                let cardHocKy = card.getAttribute('data-hocky');
+                
+                let matchKhoa = khoa === "" || cardKhoa === khoa;
+                let matchHocKy = hocky === "" || cardHocKy === hocky;
+
+                if (matchKhoa && matchHocKy) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+}

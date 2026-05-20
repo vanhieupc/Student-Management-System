@@ -1,0 +1,189 @@
+@model BTTH_05.Models.Student
+
+@{
+    ViewData["Title"] = "Thêm mới lộ trình điểm";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            @* --- Card chính --- *@
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                
+                @* --- Header màu xanh đậm đồng bộ hệ thống --- *@
+                <div class="card-header py-3 px-4" style="background-color: #003580;">
+                    <h4 class="mb-0 fw-bold text-white">
+                        <i class="fas fa-user-edit me-2"></i>CẬP NHẬT THÔNG TIN & ĐIỂM 4 NĂM
+                    </h4>
+                </div>
+
+                <div class="card-body p-4 bg-white">
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        @* --- PHẦN 1: THÔNG TIN CƠ BẢN --- *@
+                        <div class="mb-5">
+                            <h5 class="text-primary fw-bold mb-3 border-bottom pb-2">
+                                1. THÔNG TIN CƠ BẢN
+                            </h5>
+                            
+                            <div class="row g-3">
+                                @* Ô chọn sinh viên (Tích hợp tìm kiếm) *@
+                                <div class="col-md-12 mb-2">
+                                    <label class="form-label fw-bold small text-muted">CHỌN SINH VIÊN THỰC HIỆN CẬP NHẬT *</label>
+                                    <select name="MaSV" class="form-select border rounded-3 py-2 shadow-sm" id="studentSelect" asp-items="ViewBag.MaSV" required>
+                                        <option value="">-- Tìm kiếm sinh viên trong danh sách --</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted">HỌ VÀ TÊN</label>
+                                    <input id="txtHoTen" class="form-control bg-light rounded-3 py-2 border-0" placeholder="Hệ thống tự nhận diện..." readonly />
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted">LỚP HỌC</label>
+                                    <input id="txtLop" class="form-control bg-light rounded-3 py-2 border-0" placeholder="Hệ thống tự nhận diện..." readonly />
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted">NĂM THỨ ĐANG HỌC</label>
+                                    <select name="NamThu" class="form-select rounded-3 py-2 border-primary border-opacity-25 shadow-none" id="txtNam">
+                                        <option value="1">Năm 1</option>
+                                        <option value="2">Năm 2</option>
+                                        <option value="3">Năm 3</option>
+                                        <option value="4" selected>Năm 4</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold small text-muted">TRẠNG THÁI</label>
+                                    <select name="TrangThai" class="form-select rounded-3 py-2 border-primary border-opacity-25 shadow-none" id="txtTrangThai">
+                                        <option value="Đang học">Đang học</option>
+                                        <option value="Sắp tốt nghiệp" selected>Sắp tốt nghiệp</option>
+                                        <option value="Bảo lưu">Bảo lưu</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* --- PHẦN 2: ĐIỂM TRUNG BÌNH TÍCH LŨY (GPA) --- *@
+                        <div class="mb-4">
+                            <h5 class="text-success fw-bold mb-3 border-bottom pb-2">
+                                2. ĐIỂM TRUNG BÌNH TÍCH LŨY (GPA)
+                            </h5>
+                            <div class="row g-3">
+                                @* GPA Năm 1 *@
+                                <div class="col-md-3">
+                                    <div class="p-3 rounded-4 border shadow-sm h-100" style="background-color: #f0f9ff;">
+                                        <label class="form-label fw-bold small text-info text-center d-block mb-2">GPA NĂM 1</label>
+                                        <input type="number" step="0.01" min="0" max="10" name="g1"
+                                               class="form-control border-0 bg-white text-center fw-bold fs-5 shadow-none rounded-3"
+                                               placeholder="0.00" value="0.00">
+                                    </div>
+                                </div>
+
+                                @* GPA Năm 2 *@
+                                <div class="col-md-3">
+                                    <div class="p-3 rounded-4 border shadow-sm h-100" style="background-color: #fffbeb;">
+                                        <label class="form-label fw-bold small text-warning text-center d-block mb-2">GPA NĂM 2</label>
+                                        <input type="number" step="0.01" min="0" max="10" name="g2"
+                                               class="form-control border-0 bg-white text-center fw-bold fs-5 shadow-none rounded-3"
+                                               placeholder="0.00" value="0.00">
+                                    </div>
+                                </div>
+
+                                @* GPA Năm 3 *@
+                                <div class="col-md-3">
+                                    <div class="p-3 rounded-4 border shadow-sm h-100" style="background-color: #f0fdf4;">
+                                        <label class="form-label fw-bold small text-success text-center d-block mb-2">GPA NĂM 3</label>
+                                        <input type="number" step="0.01" min="0" max="10" name="g3"
+                                               class="form-control border-0 bg-white text-center fw-bold fs-5 shadow-none rounded-3"
+                                               placeholder="0.00" value="0.00">
+                                    </div>
+                                </div>
+
+                                @* GPA Năm 4 *@
+                                <div class="col-md-3">
+                                    <div class="p-3 rounded-4 border shadow-sm h-100" style="background-color: #fef2f2;">
+                                        <label class="form-label fw-bold small text-danger text-center d-block mb-2">GPA NĂM 4</label>
+                                        <input type="number" step="0.01" min="0" max="10" name="g4"
+                                               class="form-control border-0 bg-white text-center fw-bold fs-5 shadow-none rounded-3"
+                                               placeholder="0.00" value="0.00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* --- NÚT ĐIỀU HƯỚNG --- *@
+                        <div class="d-flex justify-content-center gap-3 mt-5 pb-3">
+                            <button type="submit" class="btn btn-warning text-white rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #ff8533 !important; border: none;">
+                                <i class="fas fa-cloud-upload-alt me-2"></i>CẬP NHẬT DỮ LIỆU
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">
+                                <i class="fas fa-times me-2"></i>HỦY BỎ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @* Thêm thư viện Select2 để ô tìm kiếm sinh viên mượt mà như ảnh image_90ac01.jpg *@
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+        // Khởi tạo tính năng tìm kiếm cho Select
+        $('#studentSelect').select2({
+        placeholder: "-- Gõ tên hoặc mã số sinh viên --",
+        allowClear: true,
+        theme: "classic"
+        });
+
+        // Logic tự động điền thông tin khi chọn SV
+        $('#studentSelect').on('change', function() {
+        var selectedText = $(this).find("option:selected").text();
+        if(selectedText && selectedText.includes("-")) {
+        var parts = selectedText.split("-");
+        $('#txtHoTen').val(parts[1].trim());
+        // Lưu ý: Để lấy Lớp học, bạn cần xử lý ở Controller hoặc dùng AJAX
+        $('#txtLop').val("Đang tải...");
+        } else {
+        $('#txtHoTen').val("");
+        $('#txtLop').val("");
+        }
+        });
+        });
+    </script>
+
+    <style>
+        .rounded-4 {
+        border-radius: 1rem !important;
+        }
+        
+        /* Chỉnh lại giao diện Select2 cho gọn */
+        .select2-container--classic .select2-selection--single {
+        border: 1px solid #dee2e6 !important;
+        height: 45px !important;
+        padding-top: 8px;
+        border-radius: 8px !important;
+        }
+
+        .form-control:focus, .form-select:focus {
+        border-color: #ff8533;
+        box-shadow: 0 0 0 0.25rem rgba(255, 133, 51, 0.1);
+        }
+
+        .btn-warning:hover {
+        background-color: #e6762d !important;
+        transform: translateY(-2px);
+        transition: all 0.2s;
+        }
+    </style>
+}

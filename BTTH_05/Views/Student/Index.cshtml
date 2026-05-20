@@ -1,0 +1,287 @@
+@model StudentListViewModel
+@{
+    ViewData["Title"] = "Quản Lý Sinh Viên DNU";
+}
+
+<div class="container-fluid py-4">
+    @* --- Tiêu đề & Nút thêm mới --- *@
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-8">
+            <h2 class="fw-bold text-dark mb-1">Hệ Thống Quản Lý Sinh Viên</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-primary">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Danh sách sinh viên</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+            <a asp-action="Create" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-bold border-0 btn-add-new">
+                <i class="fas fa-plus-circle me-2"></i>THÊM SINH VIÊN
+            </a>
+        </div>
+    </div>
+
+    @* --- Dashboard Thống Kê --- *@
+    <div class="row g-3 mb-4">
+        @{
+            var stats = new[] {
+                new { Title = "Tổng Sinh Viên", Value = ViewBag.TotalStudents, Icon = "fa-users", Class = "bg-stat-1" },
+                new { Title = "Sắp Tốt Nghiệp", Value = ViewBag.Year4Students, Icon = "fa-graduation-cap", Class = "bg-stat-2" },
+                new { Title = "Đang Theo Học", Value = ViewBag.ActiveStudents, Icon = "fa-user-check", Class = "bg-stat-3" },
+                new { Title = "Bảo Lưu", Value = ViewBag.BaoLuuStudents, Icon = "fa-pause-circle", Class = "bg-stat-4" },
+                new { Title = "Nghỉ Học", Value = ViewBag.NghiHocStudents, Icon = "fa-user-times", Class = "bg-stat-5" }
+            };
+        }
+        @foreach (var stat in stats)
+        {
+            <div class="col-md-4 col-xl-2-4">
+                <div class="card border-0 shadow-sm rounded-4 text-white h-100 @stat.Class">
+                    <div class="card-body p-3 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-uppercase small fw-bold opacity-75 mb-1" style="font-size: 0.7rem;">@stat.Title</h6>
+                            <h2 class="mb-0 fw-bold">@stat.Value</h2>
+                        </div>
+                        <div class="bg-white bg-opacity-20 rounded-circle p-2">
+                            <i class="fas @stat.Icon fa-lg text-white"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @* --- Bộ Lọc Tìm Kiếm --- *@
+    <div class="card border-0 shadow-sm rounded-4 mb-4 filter-card">
+        <div class="card-body p-3 bg-white rounded-4">
+            <form method="get" class="row g-2">
+                <div class="col-md-5">
+                    <div class="input-group input-group-sm border rounded-pill overflow-hidden bg-light">
+                        <span class="input-group-text border-0 bg-transparent ps-3"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" class="form-control border-0 bg-transparent py-2 shadow-none" 
+                               name="searchName" placeholder="Tìm theo tên hoặc MSSV..." value="@Model.SearchName">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group input-group-sm border rounded-pill overflow-hidden bg-light">
+                        <span class="input-group-text border-0 bg-transparent ps-3"><i class="fas fa-tag text-muted"></i></span>
+                        <input type="text" class="form-control border-0 bg-transparent py-2 shadow-none" 
+                               name="searchMajor" placeholder="Chuyên ngành..." value="@Model.SearchMajor">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-dark btn-sm w-100 rounded-pill py-2 fw-bold shadow-sm border-0 btn-filter">
+                        <i class="fas fa-filter me-1"></i>LỌC DỮ LIỆU
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @* --- Danh Sách Sinh Viên --- *@
+    <div class="row g-3">
+        @if (Model.Students != null && Model.Students.Any())
+        {
+            @foreach (var student in Model.Students)
+            {
+                <div class="col-md-6 col-xl-4">
+                    <div class="card border-0 shadow-sm rounded-4 h-100 card-student">
+                        <div class="card-body p-3 d-flex flex-column">
+                            <div class="d-flex align-items-start justify-content-between mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-circle me-2 fw-bold text-white shadow-sm" 
+                                         style="background: #003580; width: 45px; height: 45px; font-size: 1.1rem; flex-shrink: 0;">
+                                         @(string.IsNullOrEmpty(student.HoTen) ? "?" : student.HoTen.Trim().Split(' ').Last()[0].ToString().ToUpper())
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-dark">@student.HoTen</h6>
+                                        <small class="text-muted">MSSV: <span class="fw-medium">@student.MaSV</span></small>
+                                    </div>
+                                </div>
+                                
+                                @{
+                                    string statusClass = student.TrangThai switch {
+                                        "Đang học" => "bg-success-subtle text-success border-success",
+                                        "Bảo lưu" => "bg-warning-subtle text-warning border-warning",
+                                        "Đã tốt nghiệp" => "bg-primary-subtle text-primary border-primary",
+                                        "Sắp tốt nghiệp" => "bg-info-subtle text-info border-info",
+                                        "Nghỉ học" => "bg-danger-subtle text-danger border-danger",
+                                        _ => "bg-secondary-subtle text-secondary border-secondary"
+                                    };
+                                }
+                                <span class="badge @statusClass rounded-pill px-2 py-1 border" style="font-size: 0.7rem;">
+                                    @(student.TrangThai ?? "Chưa xác định")
+                                </span>
+                            </div>
+
+                            <div class="info-list mb-3" style="font-size: 0.85rem;">
+                                <div class="d-flex justify-content-between mb-1 border-bottom pb-1">
+                                    <span class="text-muted"><i class="fas fa-university me-1"></i>Ngành:</span>
+                                    <span class="fw-bold text-dark text-end">@student.NganhHoc</span> 
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-1 border-bottom pb-1">
+                                    <span class="text-muted"><i class="fas fa-graduation-cap me-1"></i>Chuyên ngành:</span>
+                                    <span class="fw-bold text-primary text-truncate ms-2 text-end" style="max-width: 160px;">
+                                        @(!string.IsNullOrEmpty(student.TenCN_TuNhap) ? student.TenCN_TuNhap : (student.ChuyenNganh?.TenCN ?? "Chưa phân ngành"))
+                                    </span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-1 border-bottom pb-1">
+                                    <span class="text-muted"><i class="fas fa-users me-1"></i>Lớp:</span>
+                                    <span class="fw-bold text-info">@(!string.IsNullOrEmpty(student.LopHoc) ? student.LopHoc : "---")</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-1 border-bottom pb-1">
+                                    <span class="text-muted"><i class="fas fa-calendar-alt me-1"></i>Năm học:</span>
+                                    <span class="fw-bold text-success">@(student.NamThu > 0 ? $"Năm thứ {student.NamThu}" : "N/A")</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-1 border-bottom pb-1">
+                                    <span class="text-muted"><i class="fas fa-phone-alt me-1"></i>SĐT:</span>
+                                    <span class="fw-bold text-dark">@(!string.IsNullOrEmpty(student.Sdt) ? student.Sdt : "Chưa có")</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted"><i class="fas fa-calendar-day me-1"></i>Ngày sinh:</span>
+                                    <span class="fw-bold text-dark">@(student.NgaySinh.HasValue ? student.NgaySinh.Value.ToString("dd/MM/yyyy") : "---")</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2 mt-auto pt-2">
+                                <a asp-action="Edit" asp-route-id="@student.MaSV" class="btn btn-sm btn-outline-primary flex-grow-1 rounded-pill fw-bold">
+                                    <i class="fas fa-edit me-1"></i>Sửa
+                                </a>
+                                <button type="button" class="btn btn-sm btn-outline-danger flex-grow-1 rounded-pill fw-bold"
+                                        onclick="confirmDelete('@student.MaSV', '@student.HoTen')">
+                                    <i class="fas fa-trash-alt me-1"></i>Xóa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5 shadow-sm rounded-4 bg-white">
+                <div class="mb-3"><i class="fas fa-user-slash fa-4x text-light"></i></div>
+                <h5 class="text-muted fw-bold">Không tìm thấy sinh viên phù hợp!</h5>
+                <p class="small text-muted">Vui lòng thử lại với từ khóa khác hoặc xóa bộ lọc.</p>
+                <a asp-action="Index" class="btn btn-outline-primary btn-sm rounded-pill px-4">Xóa tất cả bộ lọc</a>
+            </div>
+        }
+    </div>
+
+    @* --- Phân Trang --- *@
+    @if (Model.TotalPages > 1)
+    {
+        <nav class="mt-5">
+            <ul class="pagination pagination-sm justify-content-center">
+                @if (Model.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link border-0 mx-1 rounded-3 shadow-sm" href="?page=@(Model.CurrentPage - 1)&searchName=@Model.SearchName&searchMajor=@Model.SearchMajor">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                }
+                
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link border-0 mx-1 rounded-3 shadow-sm" 
+                           href="?page=@i&searchName=@Model.SearchName&searchMajor=@Model.SearchMajor">@i</a>
+                    </li>
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link border-0 mx-1 rounded-3 shadow-sm" href="?page=@(Model.CurrentPage + 1)&searchName=@Model.SearchName&searchMajor=@Model.SearchMajor">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+@* --- Modal Xóa --- *@
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-body p-4 text-center">
+                <div class="mb-3"><i class="fas fa-exclamation-circle fa-4x text-danger opacity-75"></i></div>
+                <h4 class="fw-bold">Xác nhận xóa?</h4>
+                <p class="text-muted">Bạn có chắc chắn muốn xóa sinh viên <br><strong id="studentNameDisplay" class="text-dark"></strong>?</p>
+                <div class="d-flex justify-content-center gap-2 mt-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold" data-bs-dismiss="modal">QUAY LẠI</button>
+                    <form id="deleteForm" method="post" asp-action="Delete">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" id="studentIdInput" />
+                        <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold">XÓA NGAY</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(id, name) {
+        document.getElementById('studentNameDisplay').innerText = name;
+        document.getElementById('studentIdInput').value = id;
+        var myModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        myModal.show();
+    }
+</script>
+
+<style>
+    :root {
+        --dnu-orange: #ff8533; 
+        --dnu-blue: #003580;
+    }
+
+    .rounded-4 { border-radius: 1rem !important; }
+    .avatar-circle { display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+    
+    .card-student { 
+        transition: all 0.3s ease; 
+        border: 1px solid rgba(0,0,0,0.05) !important; 
+    }
+    .card-student:hover { 
+        transform: translateY(-8px); 
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important; 
+        border-color: var(--dnu-orange) !important;
+    }
+
+    .btn-add-new { background-color: var(--dnu-orange) !important; color: white !important; }
+    .btn-add-new:hover { background-color: #e6762d !important; transform: scale(1.02); }
+
+    .bg-stat-1 { background: linear-gradient(45deg, #003580, #0056b3); }
+    .bg-stat-2 { background: linear-gradient(45deg, #ff8533, #ffa366); }
+    .bg-stat-3 { background: linear-gradient(45deg, #2ecc71, #58d68d); }
+    .bg-stat-4 { background: linear-gradient(45deg, #f39c12, #f5b041); } 
+    .bg-stat-5 { background: linear-gradient(45deg, #e74c3c, #ec7063); } 
+
+    .bg-success-subtle { background: #e8f5e9; color: #2e7d32; border-color: #c8e6c9 !important; }
+    .bg-warning-subtle { background: #fff8e1; color: #f57c00; border-color: #ffecb3 !important; }
+    .bg-info-subtle { background: #e1f5fe; color: #0288d1; border-color: #b3e5fc !important; }
+    .bg-danger-subtle { background: #ffebee; color: #d32f2f; border-color: #ffcdd2 !important; }
+
+    .page-item.active .page-link { 
+        background-color: var(--dnu-orange) !important; 
+        border: none; 
+    }
+    
+    .filter-card { border-left: 5px solid var(--dnu-blue) !important; }
+
+    @@media (min-width: 1200px) {
+        .col-xl-2-4 {
+            flex: 0 0 auto;
+            width: 20%;
+        }
+    }
+</style>

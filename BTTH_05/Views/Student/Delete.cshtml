@@ -1,0 +1,85 @@
+@model Student
+@{
+    ViewData["Title"] = "Xóa Sinh Viên";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Quản Lý Sinh Viên</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Student" asp-action="Index">📚 Quản Lý Sinh Viên</a>
+            <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Index">← Quay lại</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4 text-danger fw-bold">🗑️ Xóa Sinh Viên</h2>
+
+                <div class="alert alert-warning border-0 shadow-sm" role="alert">
+                    <strong>⚠️ Cảnh báo!</strong> Bạn định xóa sinh viên sau đây. Hành động này không thể hoàn tác!
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-4">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Mã SV</label>
+                            @* SỬA: Dùng MaSV thay vì Id *@
+                            <input type="text" class="form-control bg-light border-0" value="@Model.MaSV" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Tên Sinh Viên</label>
+                            @* SỬA: Dùng HoTen thay vì Name *@
+                            <input type="text" class="form-control bg-light border-0" value="@Model.HoTen" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Trạng Thái</label>
+                            @* SỬA: Dùng TrangThai thay vì Status *@
+                            <input type="text" class="form-control bg-light border-0" value="@Model.TrangThai" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Mã Chuyên Ngành</label>
+                            @* SỬA: Dùng MaCN thay vì MaCn *@
+                            <input type="text" class="form-control bg-light border-0" value="@(Model.MaCN?.ToString() ?? "N/A")" disabled>
+                        </div>
+
+                        <form method="post" asp-action="Delete">
+                            @* Bổ sung AntiForgeryToken để bảo mật và input ẩn để truyền ID lên Controller *@
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" asp-for="MaSV" />
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <a asp-action="Index" class="btn btn-light px-4 rounded-pill fw-bold">Hủy</a>
+                                <button type="submit" class="btn btn-danger px-4 rounded-pill shadow-sm fw-bold">
+                                    <i class="fas fa-trash-alt me-2"></i>Xác Nhận Xóa
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted mt-5 py-3">
+        <div class="container text-center">
+            &copy; 2026 - Hệ Thống Quản Lý Sinh Viên
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

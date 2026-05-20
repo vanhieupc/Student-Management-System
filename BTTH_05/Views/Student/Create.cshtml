@@ -1,0 +1,154 @@
+@model BTTH_05.Models.Student
+@{
+    ViewData["Title"] = "Thêm Sinh Viên - DNU";
+}
+
+<div class="container-fluid py-4 bg-light min-vh-100">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="mb-3">
+                <a asp-action="Index" class="btn btn-sm btn-white shadow-sm rounded-pill px-3 text-secondary fw-bold text-decoration-none">
+                    <i class="fas fa-chevron-left me-1"></i>Quay lại
+                </a>
+            </div>
+
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                @* Header: Gradient DNU đặc trưng (Xanh đậm sang Cam nhạt) *@
+                <div class="card-header py-3 border-0" style="background: linear-gradient(135deg, #003580 0%, #ff8533 100%) !important;">
+                    <h5 class="mb-0 text-center text-white text-uppercase fw-bold" style="letter-spacing: 1px;">
+                        <i class="fas fa-user-plus me-2"></i>Thêm Sinh Viên Mới
+                    </h5>
+                </div>
+                
+                <div class="card-body p-4 bg-white">
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+                        
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        @* MaCN mặc định hoặc để trống tùy logic dự án *@
+                        <input type="hidden" asp-for="MaCN" value="1" />
+
+                        <div class="row g-3">
+                            @* --- HỌ TÊN --- *@
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-dark ms-2">Họ và Tên <span class="text-danger">*</span></label>
+                                <input asp-for="HoTen" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" 
+                                       placeholder="Nhập họ và tên đầy đủ...">
+                                <span asp-validation-for="HoTen" class="text-danger extra-small"></span>
+                            </div>
+
+                            @* --- MSSV --- *@
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Mã Sinh Viên (MSSV) <span class="text-danger">*</span></label>
+                                <input asp-for="MaSV" type="number" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" 
+                                       placeholder="Ví dụ: 20261001">
+                                <span asp-validation-for="MaSV" class="text-danger extra-small"></span>
+                            </div>
+
+                            @* --- NGÀY SINH --- *@
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Ngày Sinh</label>
+                                <input asp-for="NgaySinh" type="text" 
+                                       class="form-control form-control-sm bg-light border-0 rounded-pill px-3" 
+                                       placeholder="dd/MM/yyyy">
+                                <span asp-validation-for="NgaySinh" class="text-danger extra-small"></span>
+                            </div>
+
+                            @* --- KHỐI MÔN HỌC (Viền Cam nhạt đứt đoạn) --- *@
+                            <div class="col-12">
+                                <div class="p-2 rounded-4" style="background-color: #fffaf5; border: 1px dashed #ff8533;">
+                                    <label class="form-label small fw-bold text-dark ms-2 mb-1">
+                                        <i class="fas fa-book me-1 text-warning"></i> Môn Học Đang Theo Học
+                                    </label>
+                                    <input asp-for="TenMonHoc" class="form-control form-control-sm border-0 rounded-pill px-3 shadow-sm" 
+                                           placeholder="Ví dụ: Lập trình .NET, Marketing...">
+                                </div>
+                            </div>
+
+                            @* --- NGÀNH HỌC & LỚP HỌC --- *@
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Ngành Học</label>
+                                <input asp-for="NganhHoc" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" placeholder="VD: Luật, CNTT...">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Lớp học</label>
+                                <input asp-for="LopHoc" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" 
+                                       placeholder="Ví dụ: CNTT14-01">
+                            </div>
+
+                            @* --- CHUYÊN NGÀNH GÕ TAY --- *@
+                            <div class="col-12">
+                                <label class="form-label small fw-bold text-dark ms-2">Chuyên Ngành Chi Tiết (Gõ tay)</label>
+                                <input asp-for="TenCN_TuNhap" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" 
+                                       placeholder="Kỹ thuật phần mềm, Luật kinh tế...">
+                            </div>
+
+                            @* --- NĂM THỨ & TRẠNG THÁI --- *@
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-primary ms-2"><i class="fas fa-graduation-cap me-1"></i>Năm thứ mấy?</label>
+                                <select asp-for="NamThu" class="form-select form-select-sm border-0 rounded-pill px-3" style="background-color: #f0f7ff;">
+                                    <option value="">-- Chọn năm --</option>
+                                    <option value="1">Năm thứ 1</option>
+                                    <option value="2">Năm thứ 2</option>
+                                    <option value="3">Năm thứ 3</option>
+                                    <option value="4">Năm thứ 4</option>
+                                    <option value="5">Năm thứ 5</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Trạng Thái</label>
+                                <select asp-for="TrangThai" class="form-select form-select-sm bg-light border-0 rounded-pill px-3">
+                                    <option value="Đang học">Đang học</option>
+                                    <option value="Sắp tốt nghiệp">Sắp tốt nghiệp</option>
+                                    <option value="Đã tốt nghiệp">Đã tốt nghiệp</option>
+                                    <option value="Bảo lưu">Bảo lưu</option>
+                                    <option value="Nghỉ học">Nghỉ học</option>
+                                </select>
+                            </div>
+
+                            @* --- SỐ ĐIỆN THOẠI & EMAIL --- *@
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Số điện thoại</label>
+                                <input asp-for="Sdt" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" placeholder="09xxxxxxxx">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small fw-bold text-dark ms-2">Email</label>
+                                <input asp-for="Email" type="email" class="form-control form-control-sm bg-light border-0 rounded-pill px-3" placeholder="sv@dnu.edu.vn">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 d-flex gap-2">
+                            @* Nút Lưu: Gradient từ Cam sang Xanh đậm hòa quyện *@
+                            <button type="submit" class="btn btn-sm rounded-pill px-4 flex-grow-1 fw-bold shadow border-0 text-white" 
+                                    style="background: linear-gradient(90deg, #ff8533 0%, #003580 100%) !important;">
+                                <i class="fas fa-save me-1"></i>LƯU THÔNG TIN
+                            </button>
+                            <a asp-action="Index" class="btn btn-light btn-sm rounded-pill px-4 fw-bold border text-muted">
+                                HỦY
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --dnu-orange-soft: #ff8533;
+    }
+    .extra-small { font-size: 0.75rem; }
+    .btn-white { background: #fff; border: 1px solid #eee; }
+    .form-control-sm, .form-select-sm { height: 40px; }
+    .form-control:focus, .form-select:focus {
+        background-color: #fff !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 133, 51, 0.2);
+        border: 1px solid var(--dnu-orange-soft) !important;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,81 @@
+@model BTTH_05.Models.Diem
+
+@{
+    ViewData["Title"] = "Chi Tiết Điểm";
+}
+
+<div class="container mt-4">
+    <div class="card shadow border-0 rounded-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center p-3">
+            <h4 class="mb-0"><i class="fas fa-info-circle me-2"></i>Chi Tiết Kết Quả Học Tập</h4>
+            <span class="badge bg-white text-primary px-3 py-2 rounded-pill fw-bold">Mã SV: @Model.MaSV</span>
+        </div>
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-6 border-end">
+                    <h5 class="text-secondary border-bottom pb-2 fw-bold">Thông tin chung</h5>
+                    <dl class="row mt-3">
+                        <dt class="col-sm-4 text-muted">Sinh viên:</dt>
+                        @* Đã sửa: Chỉ dùng HoTen để khớp với Models/Student.cs *@
+                        <dd class="col-sm-8 text-primary fw-bold">@(Model.Student?.HoTen ?? "N/A")</dd>
+
+                        <dt class="col-sm-4 text-muted">Môn học:</dt>
+                        <dd class="col-sm-8 fw-bold">@(Model.MonHoc?.TenMH ?? "N/A")</dd>
+
+                        <dt class="col-sm-4 text-muted">Lớp:</dt>
+                        <dd class="col-sm-8">@(Model.Lop ?? "Chưa xếp lớp")</dd>
+
+                        <dt class="col-sm-4 text-muted">Học kỳ:</dt>
+                        <dd class="col-sm-8">Học kỳ @(Model.HocKy ?? "---")</dd>
+
+                        <dt class="col-sm-4 text-muted">Năm học:</dt>
+                        <dd class="col-sm-8">Năm học @(Model.NamHoc ?? 0)</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-6 ps-md-4">
+                    <h5 class="text-secondary border-bottom pb-2 fw-bold">Kết quả thành phần</h5>
+                    <div class="row mt-3">
+                        <div class="col-6 mb-3">
+                            <div class="p-3 border-0 rounded-4 bg-light text-center shadow-sm">
+                                <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.7rem;">Chuyên cần (10%)</small>
+                                <span class="h4 fw-bold text-dark">@(Model.DiemChuyenCan?.ToString("0.0") ?? "0.0")</span>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="p-3 border-0 rounded-4 bg-light text-center shadow-sm">
+                                <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.7rem;">Giữa kỳ (30%)</small>
+                                <span class="h4 fw-bold text-dark">@(Model.DiemGiuaKy?.ToString("0.0") ?? "0.0")</span>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="p-3 border-0 rounded-4 bg-light text-center shadow-sm">
+                                <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.7rem;">Cuối kỳ (60%)</small>
+                                <span class="h4 fw-bold text-dark">@(Model.DiemCuoiKy?.ToString("0.0") ?? "0.0")</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="p-3 border-0 rounded-4 bg-warning bg-opacity-10 text-center shadow-sm border border-warning border-opacity-25">
+                                <small class="text-warning-dark d-block fw-bold text-uppercase">Điểm trung bình hệ 10</small>
+                                <span class="display-6 text-danger fw-bold">@(Model.DiemTrungBinh?.ToString("0.0") ?? "0.0")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-light p-3 text-end border-0">
+            <a asp-action="Edit" asp-route-id="@Model.MaSV" asp-route-mamh="@Model.MaMH" class="btn btn-warning px-4 rounded-pill fw-bold shadow-sm">
+                <i class="fas fa-edit me-1"></i> Chỉnh sửa
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary px-4 rounded-pill fw-bold ms-2">
+                <i class="fas fa-arrow-left me-1"></i> Quay lại
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rounded-4 { border-radius: 1rem !important; }
+    .text-warning-dark { color: #856404; }
+</style>

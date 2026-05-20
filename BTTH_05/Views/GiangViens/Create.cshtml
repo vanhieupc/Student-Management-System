@@ -1,0 +1,81 @@
+@model BTTH_05.Models.GiangVien
+
+@{
+    ViewData["Title"] = "Thêm giảng viên mới";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Thêm Giảng Viên Mới</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Mã Giảng Viên</label>
+                            <input asp-for="MaGV" class="form-control" placeholder="Nhập mã (VD: 01, GV01)" required />
+                            <span asp-validation-for="MaGV" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Họ và Tên</label>
+                            <input asp-for="HoTen" class="form-control" placeholder="Nhập họ tên đầy đủ" required />
+                            <span asp-validation-for="HoTen" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="example@gmail.com" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Điện Thoại</label>
+                            <input asp-for="SoDienThoai" class="form-control" placeholder="Số điện thoại liên lạc" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Khoa</label>
+                            <input asp-for="Khoa" class="form-control" placeholder="Ví dụ: Công nghệ thông tin" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Chức Danh</label>
+                            <input asp-for="ChucDanh" class="form-control" placeholder="Ví dụ: Giảng viên, Thạc sĩ" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Trạng Thái</label>
+                            <select asp-for="TrangThai" class="form-select">
+                                <option value="Đang làm việc">Đang làm việc</option>
+                                <option value="Nghỉ phép">Nghỉ phép</option>
+                                <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Mã Chuyên Ngành (ID số)</label>
+                            <input asp-for="MaCN" type="number" class="form-control" placeholder="Nhập ID số của chuyên ngành" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 border-top pt-3 text-end">
+                    <a asp-action="Index" class="btn btn-secondary me-2">Hủy bỏ</a>
+                    <button type="submit" class="btn btn-success px-4">Lưu hệ thống</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

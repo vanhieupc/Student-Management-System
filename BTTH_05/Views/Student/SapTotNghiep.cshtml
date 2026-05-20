@@ -1,0 +1,157 @@
+@model IEnumerable<BTTH_05.Models.Student>
+
+@{
+    ViewData["Title"] = "Sinh Viên Sắp Tốt Nghiệp";
+}
+
+<div class="container-fluid py-4 bg-light min-vh-100">
+    @* --- Tiêu đề trang --- *@
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-primary mb-1">
+                <i class="fas fa-user-graduate me-2"></i>DANH SÁCH SẮP TỐT NGHIỆP
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Sắp tốt nghiệp</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="text-end">
+            <span class="badge bg-success px-3 py-2 rounded-pill shadow-sm">
+                Tổng cộng: @Model.Count() sinh viên
+            </span>
+        </div>
+    </div>
+
+    @* --- Danh sách thẻ Card --- *@
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                double currentGpa = item.GpaTuNhap ?? 0.0;
+                
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 transition-hover overflow-hidden">
+                        @* Thanh trạng thái màu dựa trên điểm số *@
+                        <div style="height: 5px; width: 100%; background: @(currentGpa >= 8.0 ? "#28a745" : (currentGpa >= 6.5 ? "#ffc107" : "#003580"))"></div>
+                        
+                        <div class="card-body p-4">
+                            @* --- Phần đầu: Avatar, Tên và GPA --- *@
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-sq bg-primary-subtle text-primary rounded-3 me-3">
+                                        <i class="fas fa-id-card fa-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="fw-bold mb-0 text-dark">@item.HoTen</h5>
+                                        <small class="text-muted fw-bold">MSSV: #@item.MaSV</small>
+                                    </div>
+                                </div>
+                                <div class="text-center bg-primary text-white rounded-3 p-2 shadow-sm" style="min-width: 60px;">
+                                    <div class="small opacity-75 text-uppercase" style="font-size: 0.6rem;">GPA</div>
+                                    <div class="fw-bold h5 mb-0">@currentGpa.ToString("0.0#")</div>
+                                </div>
+                            </div>
+
+                            @* --- Phần thân: Thông tin chi tiết (Đã sửa Ngành & Chuyên ngành) --- *@
+                            <div class="p-3 bg-light rounded-4 mb-3 border-start border-4 border-primary">
+                                
+                                @* HIỂN THỊ NGÀNH HỌC *@
+                                <div class="d-flex justify-content-between mb-2 border-bottom pb-1">
+                                    <span class="text-muted small"><i class="fas fa-university me-1"></i>Ngành:</span>
+                                    <span class="fw-bold small text-dark">@(!string.IsNullOrEmpty(item.NganhHoc) ? item.NganhHoc : "Chưa cập nhật")</span>
+                                </div>
+
+                                @* HIỂN THỊ CHUYÊN NGÀNH *@
+                                <div class="d-flex justify-content-between mb-2 border-bottom pb-1">
+                                    <span class="text-muted small"><i class="fas fa-graduation-cap me-1"></i>Chuyên ngành:</span>
+                                    <span class="fw-bold small text-primary text-end text-truncate ms-2" style="max-width: 160px;">
+                                        @(!string.IsNullOrEmpty(item.TenCN_TuNhap) ? item.TenCN_TuNhap : (item.ChuyenNganh?.TenCN ?? "N/A"))
+                                    </span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-2 border-bottom pb-1">
+                                    <span class="text-muted small"><i class="fas fa-users me-1"></i>Lớp:</span>
+                                    <span class="fw-bold small">@(item.LopHoc ?? "N/A")</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="text-muted small"><i class="fas fa-star me-1"></i>Xếp loại:</span>
+                                    <span class="fw-bold small @(currentGpa >= 8.0 ? "text-success" : (currentGpa >= 6.5 ? "text-warning" : "text-dark"))">
+                                        @(currentGpa >= 8.0 ? "Giỏi" : (currentGpa >= 6.5 ? "Khá" : (currentGpa >= 4.0 ? "Trung bình" : "Yếu/Học lại")))
+                                    </span>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between mt-2 border-top pt-2">
+                                    <span class="text-muted small"><i class="fas fa-phone me-1"></i>SĐT:</span>
+                                    <span class="small fw-bold text-dark">@(item.Sdt ?? "---")</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-1">
+                                    <span class="text-muted small"><i class="fas fa-envelope me-1"></i>Email:</span>
+                                    <span class="small fw-bold text-dark text-truncate ms-2" title="@item.Email">
+                                        @(!string.IsNullOrEmpty(item.Email) ? item.Email : "Chưa cập nhật")
+                                    </span>
+                                </div>
+                            </div>
+
+                            @* --- Phần cuối: Nút thao tác --- *@
+                            <div class="d-flex align-items-center justify-content-between pt-2">
+                                <span class="badge @(currentGpa >= 4.0 ? "bg-success-subtle text-success" : "bg-danger-subtle text-danger") rounded-pill">
+                                    <i class="fas @(currentGpa >= 4.0 ? "fa-check-circle" : "fa-exclamation-triangle") me-1"></i>
+                                    @(currentGpa >= 4.0 ? "Đủ điều kiện" : "Cần cải thiện")
+                                </span>
+                                <div class="d-flex gap-2">
+                                    <a asp-controller="Student" asp-action="Details" asp-route-id="@item.MaSV" 
+                                       class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold shadow-sm">
+                                        CHI TIẾT <i class="fas fa-chevron-right ms-1 small"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center py-5">
+                <div class="p-5 bg-white rounded-4 shadow-sm">
+                    <i class="fas fa-user-slash fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Chưa có sinh viên nào "Sắp tốt nghiệp"</h5>
+                    <p class="small text-secondary">Hãy vào phần Quản lý điểm để cập nhật GPA cho sinh viên Năm 4.</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .rounded-4 { border-radius: 1.1rem !important; }
+    .bg-primary-subtle { background-color: #e7f1ff !important; }
+    .bg-success-subtle { background-color: #e8f5e9; color: #2e7d32; }
+    .bg-danger-subtle { background-color: #ffebee; color: #c62828; }
+    .avatar-sq { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+    
+    .transition-hover {
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+    .transition-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,53,128,0.12) !important;
+    }
+
+    .card { background: #ffffff; border: 1px solid #edf2f7 !important; }
+    .badge { font-weight: 600; font-size: 0.75rem; padding: 0.5em 1em; }
+    
+    .text-truncate {
+        max-width: 180px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+</style>
