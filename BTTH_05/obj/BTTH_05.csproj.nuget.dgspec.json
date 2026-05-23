@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj": {}
+    "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj": {
+    "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
         "projectName": "BTTH_05",
-        "projectPath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+        "projectPath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

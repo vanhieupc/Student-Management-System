@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cx0HGC8Q9/Q=",
+  "dgSpecHash": "PfoA3FhEaQc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -134,9 +134,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'NuGet.Packaging' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
-      "projectPath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+      "projectPath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+      "filePath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
       "libraryId": "NuGet.Packaging",
       "targetGraphs": [
         "net10.0"
@@ -146,9 +146,9 @@
       "code": "NU1901",
       "level": "Warning",
       "message": "Package 'NuGet.Protocol' 6.12.1 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg",
-      "projectPath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+      "projectPath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\BTTH_05.csproj",
+      "filePath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\BTTH_05.csproj",
       "libraryId": "NuGet.Protocol",
       "targetGraphs": [
         "net10.0"

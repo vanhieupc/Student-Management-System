@@ -1,17 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\",
+  "WorkspaceRootPath": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\qly_sinhvien\\btth_05\\controllers\\diemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\student_nhom6\\student-management-system\\btth_05\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|solutionrelative:btth_05\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\student_nhom6\\student-management-system\\btth_05\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|solutionrelative:btth_05\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\student_nhom6\\student-management-system\\btth_05\\controllers\\diemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|solutionrelative:btth_05\\controllers\\diemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\qly_sinhvien\\btth_05\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\student_nhom6\\student-management-system\\btth_05\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|solutionrelative:btth_05\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\qly_sinhvien\\btth_05\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|c:\\users\\admin\\downloads\\student_nhom6\\student-management-system\\btth_05\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{547CC93E-86ED-BC9E-4568-062B77076C46}|BTTH_05\\BTTH_05.csproj|solutionrelative:btth_05\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,7 +34,7 @@
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
               "$type": "Bookmark",
@@ -51,23 +59,49 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "BTTH_05\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "BTTH_05\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T08:21:41.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Views\\Account\\login.cshtml",
+              "RelativeDocumentMoniker": "BTTH_05\\Views\\Account\\login.cshtml",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Views\\Account\\login.cshtml",
+              "RelativeToolTip": "BTTH_05\\Views\\Account\\login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-23T08:20:51.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "DiemsController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\Controllers\\DiemsController.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Controllers\\DiemsController.cs",
               "RelativeDocumentMoniker": "BTTH_05\\Controllers\\DiemsController.cs",
-              "ToolTip": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\Controllers\\DiemsController.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Controllers\\DiemsController.cs",
               "RelativeToolTip": "BTTH_05\\Controllers\\DiemsController.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-20T08:29:11.475Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\appsettings.json",
               "RelativeDocumentMoniker": "BTTH_05\\appsettings.json",
-              "ToolTip": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\appsettings.json",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\appsettings.json",
               "RelativeToolTip": "BTTH_05\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
@@ -75,11 +109,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Program.cs",
               "RelativeDocumentMoniker": "BTTH_05\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\Downloads\\qly_sinhvien\\BTTH_05\\Program.cs",
+              "ToolTip": "C:\\Users\\Admin\\Downloads\\Student_Nhom6\\Student-Management-System\\BTTH_05\\Program.cs",
               "RelativeToolTip": "BTTH_05\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

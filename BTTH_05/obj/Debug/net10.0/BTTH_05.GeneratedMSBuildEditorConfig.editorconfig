@@ -20,113 +20,117 @@ build_property.TargetFrameworkVersion = v10.0
 build_property.EntryPointFilePath = 
 build_property.RootNamespace = BTTH_05
 build_property.RootNamespace = BTTH_05
-build_property.ProjectDir = C:\Users\Admin\Downloads\qly_sinhvien\BTTH_05\
+build_property.ProjectDir = C:\Users\Admin\Downloads\Student_Nhom6\Student-Management-System\BTTH_05\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Admin\Downloads\qly_sinhvien\BTTH_05
+build_property.MSBuildProjectDirectory = C:\Users\Admin\Downloads\Student_Nhom6\Student-Management-System\BTTH_05
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Diems/Create.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Account/login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxsb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Diems/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Diems/Details.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Diems/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Diems/Edit.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Diems/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Diems/Index.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Diems/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGllbXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/GiangViens/Create.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/GiangViens/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/GiangViens/Edit.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/GiangViens/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/GiangViens/Index.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/GiangViens/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhbmdWaWVuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Home/Index.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Home/Privacy.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/MonHocs/Create.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/MonHocs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/MonHocs/Delete.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/MonHocs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/MonHocs/Details.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/MonHocs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/MonHocs/Edit.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/MonHocs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/MonHocs/Index.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/MonHocs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Shared/Error.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Student/Create.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Student/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Student/Delete.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Student/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Student/Details.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Student/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Student/Edit.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Student/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Student/Index.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Student/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Student/SapTotNghiep.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Student/SapTotNghiep.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTYXBUb3ROZ2hpZXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/_ViewImports.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/_ViewStart.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/qly_sinhvien/BTTH_05/Views/Shared/_Layout.cshtml]
+[C:/Users/Admin/Downloads/Student_Nhom6/Student-Management-System/BTTH_05/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-86yathw3jj

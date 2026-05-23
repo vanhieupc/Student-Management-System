@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\BTTH_05",
-    "\\BTTH_05\\Views"
+    "\\BTTH_05\\Controllers",
+    "\\BTTH_05\\Views",
+    "\\BTTH_05\\Views\\Account"
   ],
-  "SelectedNode": "\\QuanLySinhVien_D.sql",
+  "SelectedNode": "\\BTTH_05.slnx",
   "PreviewInSolutionExplorer": false
 }
