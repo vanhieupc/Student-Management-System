@@ -12,7 +12,7 @@ namespace BTTH_05.Controllers
     {
         private readonly IStudentService _studentService;
         private readonly IDiemService _diemService;
-        private const int PageSize = 6; // Đã chỉnh thành 6 để khớp với Layout 3 cột
+        private const int PageSize = 6;
 
         public StudentController(IStudentService studentService, IDiemService diemService)
         {
@@ -20,23 +20,19 @@ namespace BTTH_05.Controllers
             _diemService = diemService;
         }
 
-        // 1. Danh sách sinh viên - Hiển thị Card và Thống kê
+        // 1. Danh sách sinh viên - Index
         public IActionResult Index(int page = 1, string searchName = "", string searchMajor = "")
         {
-            // Lấy danh sách đã qua lọc tìm kiếm (Tên, MSSV hoặc Chuyên ngành)
             var allFilteredStudents = _studentService.SearchStudents(searchName, searchMajor);
-
-            // Lấy toàn bộ danh sách để tính toán số liệu cho 5 card thống kê ở Header
             var fullList = _studentService.GetAllStudents();
 
-            // Đổ dữ liệu vào ViewBag cho Header
+            // Thống kê Header - Đã sửa đếm Sắp tốt nghiệp phải có GPA >= 5
             ViewBag.TotalStudents = fullList.Count;
-            ViewBag.Year4Students = fullList.Count(s => s.TrangThai == "Sắp tốt nghiệp" || s.NamThu == 4);
+            ViewBag.Year4Students = fullList.Count(s => (s.TrangThai == "Sắp tốt nghiệp" || s.NamThu == 4) && (s.GpaTuNhap >= 5.0));
             ViewBag.ActiveStudents = fullList.Count(s => s.TrangThai == "Đang học");
             ViewBag.BaoLuuStudents = fullList.Count(s => s.TrangThai == "Bảo lưu");
             ViewBag.NghiHocStudents = fullList.Count(s => s.TrangThai == "Nghỉ học");
 
-            // Tính toán phân trang
             var totalItems = allFilteredStudents.Count;
             var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
 
@@ -48,7 +44,6 @@ namespace BTTH_05.Controllers
                 .Take(PageSize)
                 .ToList();
 
-            // Khởi tạo ViewModel đồng bộ với file StudentListViewModel.cs Quân vừa sửa
             var viewModel = new StudentListViewModel
             {
                 Students = pagedStudents,
@@ -62,36 +57,23 @@ namespace BTTH_05.Controllers
             return View(viewModel);
         }
 
-        // 2. Danh sách sắp tốt nghiệp (Dành cho chức năng thống kê riêng)
+        // 2. Danh sách sắp tốt nghiệp - Chỉ lấy người ĐỦ ĐIỀU KIỆN (GPA >= 5)
         public async Task<IActionResult> SapTotNghiep()
         {
+            // Lấy toàn bộ SV từ Service
             var fullList = _studentService.GetAllStudents();
 
+            // Lọc danh sách: Năm 4/Sắp tốt nghiệp VÀ điểm GPA tự nhập phải >= 5.0
             var listSapTotNghiep = fullList
-                .Where(s => s.TrangThai == "Sắp tốt nghiệp" || s.NamThu == 4)
+                .Where(s => (s.TrangThai == "Sắp tốt nghiệp" || s.NamThu == 4) && s.GpaTuNhap >= 5.0)
+                .OrderByDescending(s => s.GpaTuNhap)
                 .ToList();
 
-            var allDiems = await _diemService.GetAllDiemsAsync();
-            var gpaDictionary = new Dictionary<long, double>();
-
-            foreach (var sv in listSapTotNghiep)
-            {
-                if (sv.GpaTuNhap.HasValue && sv.GpaTuNhap > 0)
-                {
-                    gpaDictionary[sv.MaSV] = sv.GpaTuNhap.Value;
-                }
-                else
-                {
-                    var diemCuaSv = allDiems.Where(d => d.MaSV == sv.MaSV).ToList();
-                    double gpa = diemCuaSv.Any() ? Math.Round(diemCuaSv.Average(d => d.DiemTrungBinh ?? 0), 2) : 0;
-                    gpaDictionary[sv.MaSV] = gpa;
-                }
-            }
-
-            ViewBag.GpaList = gpaDictionary;
+            // Trả về View trực tiếp danh sách này
             return View(listSapTotNghiep);
         }
 
+        // 3. Thêm mới sinh viên
         public IActionResult Create() => View();
 
         [HttpPost]
@@ -111,6 +93,7 @@ namespace BTTH_05.Controllers
             }
         }
 
+        // 4. Chi tiết sinh viên
         public async Task<IActionResult> Details(long id)
         {
             var student = _studentService.GetStudentById(id);
@@ -121,6 +104,7 @@ namespace BTTH_05.Controllers
 
             ViewBag.BangDiem = diemList;
 
+            // Tính toán GPA hiển thị trong Details
             if (student.GpaTuNhap.HasValue && student.GpaTuNhap > 0)
             {
                 ViewBag.GPATichLuy = student.GpaTuNhap.Value;
@@ -133,6 +117,7 @@ namespace BTTH_05.Controllers
             return View(student);
         }
 
+        // 5. Chỉnh sửa thông tin
         public IActionResult Edit(long id)
         {
             var student = _studentService.GetStudentById(id);
@@ -159,6 +144,7 @@ namespace BTTH_05.Controllers
             }
         }
 
+        // 6. Xóa sinh viên
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(long id)
